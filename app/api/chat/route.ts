@@ -26,7 +26,8 @@ export async function POST(req: Request) {
 
     try {
       // Call Laravel backend copilot endpoint
-      const response = await fetch('http://127.0.0.1:8000/api/copilot/chat', {
+      const backendBaseUrl = process.env.BACKEND_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${backendBaseUrl}/api/copilot/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
