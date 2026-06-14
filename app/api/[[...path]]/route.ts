@@ -35,7 +35,10 @@ async function handleProxy(request: NextRequest) {
     
     const responseHeaders = new Headers()
     response.headers.forEach((value, key) => {
-      responseHeaders.set(key, value)
+      const lowerKey = key.toLowerCase();
+      if (lowerKey !== 'content-encoding' && lowerKey !== 'content-length' && lowerKey !== 'transfer-encoding') {
+        responseHeaders.set(key, value)
+      }
     })
 
     return new Response(body, {
